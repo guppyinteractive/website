@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy Policy &mdash; IFMachine</title>
-  <meta name="description" content="IFMachine privacy policy. No analytics, advertising, crash reporting, or tracking SDKs.">
+  <meta name="description" content="IFMachine privacy policy. No advertising or behavioural-analytics SDKs; the closed-testing build's crash reporting (Sentry) is disclosed in the policy.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,7 +16,7 @@
 
     <p class="meta">
       <strong>Effective date:</strong> 2026-05-23<br>
-      <strong>Last updated:</strong> 2026-05-23
+      <strong>Last updated:</strong> 2026-06-03
     </p>
 
     <p>
@@ -132,6 +132,12 @@
         display which account is currently connected. It is never sent to
         any server we operate; see &sect;3 for how it is used by Google's
         own Drive authentication flow.</li>
+      <li><strong>Age-screen year of birth</strong> &mdash;
+        <em>only if you open the IFDB browser</em> &mdash; the year of
+        birth you enter at the age screen, plus a flag recording that you
+        passed it. Stored locally so you are not re-prompted; never
+        transmitted. Used only to keep under-18 users out of the IFDB
+        catalogue (see &sect;7).</li>
     </ul>
     <p>
       This data lives in the app's private storage and is removed when you
@@ -324,17 +330,28 @@
     <p>
       The current closed-testing build of IFMachine is distributed by
       invitation only and is not directed at or appropriate for
-      children under 13. The app does not ask for age, does not show
-      advertising, and does not knowingly solicit data from children.
-      Any crash data collected via Sentry (described in &sect;5) is
-      limited to the listed diagnostic and device data and is used
-      only for debugging; we do not attempt to identify individual
+      children. The app does not show advertising and does not knowingly
+      collect or transmit personal data from children. The one piece of
+      age data it asks for &mdash; the year of birth entered at the IFDB
+      age screen &mdash; stays on your device only, is never transmitted,
+      and exists solely to keep under-18 users out of the catalogue (see
+      the next paragraph). Any crash data collected via Sentry (described
+      in &sect;5) is limited to the listed diagnostic and device data and
+      is used only for debugging; we do not attempt to identify individual
       users.
     </p>
     <p>
       Some interactive-fiction games available through IFDB are written
-      for adult audiences. IFMachine itself does not curate or rate game
-      content. Parents and guardians should supervise downloads of
+      for adult audiences. Because that catalogue is open and unmoderated,
+      the in-app IFDB browser is kept behind an <strong>age screen</strong>:
+      the first time you open it, IFMachine asks for your year of birth
+      and an acknowledgement before the catalogue is shown, and keeps it
+      hidden from anyone under&nbsp;18. <strong>The year of birth you
+      enter is stored on your device only and is never transmitted to us
+      or anyone else</strong> &mdash; it exists solely so the app
+      remembers you have passed the age screen. You can clear it by
+      uninstalling the app or clearing its data in Android Settings.
+      Parents and guardians should still supervise downloads of
       third-party game files as they would any other internet content.
     </p>
 
@@ -382,7 +399,8 @@
       <li><strong>Delete your data</strong>: uninstalling IFMachine
         removes all locally stored data (game files, saves and
         autosaves, transcripts, maps, game-managed sidecars, library
-        metadata, cover art, debug log, settings). To delete
+        metadata, cover art, debug log, settings, and the age-screen year
+        of birth). To delete
         cloud-synced content, delete the synced folder in your Google
         Drive. Crash data already sent to Sentry cannot be individually
         deleted on request in the current build (see &sect;5); it
@@ -421,6 +439,7 @@
     <footer>
       <nav>
         <a href="index.html">Home</a>
+        <a href="content-policy.html">Content policy</a>
         <a href="support.html">Support</a>
       </nav>
     </footer>
