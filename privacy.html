@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy Policy &mdash; IFMachine</title>
-  <meta name="description" content="IFMachine privacy policy. No advertising or behavioural-analytics SDKs; the closed-testing build's crash reporting (Sentry) is disclosed in the policy.">
+  <meta name="description" content="IFMachine privacy policy. No advertising or behavioural-analytics SDKs; the closed-testing build's crash reporting (Sentry) and optional in-app problem reports are disclosed in the policy.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,7 +16,7 @@
 
     <p class="meta">
       <strong>Effective date:</strong> 2026-05-23<br>
-      <strong>Last updated:</strong> 2026-06-03
+      <strong>Last updated:</strong> 2026-06-11
     </p>
 
     <p>
@@ -78,14 +78,17 @@
     <p>
       The situations in which information <em>does</em> leave your
       device are described in &sect;3 (optional Google Drive sync of
-      your per-story content), &sect;4 (optional IFDB lookups), and
+      your per-story content), &sect;4 (optional IFDB lookups),
       &sect;5 (Sentry crash reporting, always-on in the current
-      closed-testing build). &sect;3 and &sect;4 are off by default and
-      require an explicit action by you. Section&nbsp;2 lists what the
-      app stores <strong>locally on your device</strong> &mdash;
-      including the Google account name once you connect Drive sync,
-      which is kept on-device so the Settings screen can show you which
-      account is linked.
+      closed-testing build), and &sect;6 (problem reports you choose to
+      send). &sect;3 and &sect;4 are off by default and require an
+      explicit action by you; &sect;6 happens only when you press Send on
+      a report whose full contents are shown to you first.
+      Section&nbsp;2 lists what the app stores
+      <strong>locally on your device</strong> &mdash; including the
+      Google account name once you connect Drive sync, which is kept
+      on-device so the Settings screen can show you which account is
+      linked.
     </p>
 
     <h2>2. What is stored on your device</h2>
@@ -115,7 +118,8 @@
         you happen to type into a game (for example a name, an email
         address, or a password-like string). The log stays in the app's
         private storage and never leaves your device unless you
-        explicitly export it via the Debug tab. Exporting uses the
+        explicitly export it via the Debug tab or include it in a problem
+        report you choose to send (&sect;6). Exporting uses the
         Android share sheet, which lets you pick the destination
         (email, file save, messaging app, etc.); the log content goes
         wherever you send it. To remove the log, uninstall the app or
@@ -132,12 +136,13 @@
         display which account is currently connected. It is never sent to
         any server we operate; see &sect;3 for how it is used by Google's
         own Drive authentication flow.</li>
-      <li><strong>Age-screen year of birth</strong> &mdash;
-        <em>only if you open the IFDB browser</em> &mdash; the year of
+      <li><strong>Age-screen date of birth</strong> &mdash;
+        <em>only if you open the IFDB browser</em> &mdash; the date of
         birth you enter at the age screen, plus a flag recording that you
-        passed it. Stored locally so you are not re-prompted; never
-        transmitted. Used only to keep under-18 users out of the IFDB
-        catalogue (see &sect;7).</li>
+        passed it. Stored locally and never transmitted; kept so you are
+        not re-prompted and so the catalogue unlocks on its own once you
+        turn 18. Used only to keep under-18 users out of the IFDB
+        catalogue (see &sect;8).</li>
     </ul>
     <p>
       This data lives in the app's private storage and is removed when you
@@ -308,14 +313,59 @@
       days.
     </p>
 
-    <h2>6. Permissions</h2>
+    <h2>6. Problem reports you choose to send</h2>
+
+    <p>
+      Settings &rarr; About &rarr; "Report a problem" lets you send us a
+      diagnostic report. Nothing on this screen is sent automatically or
+      in the background &mdash; a report goes out only when you press
+      <strong>Send</strong>, and the contents of the report are shown on
+      screen first.
+    </p>
+    <p>A problem report contains:</p>
+    <ul>
+      <li>The description you type</li>
+      <li>The IFMachine version, build number, and release identifier</li>
+      <li>Your device's manufacturer, model, and Android version</li>
+      <li>The recent tail of the debug log described in &sect;2 (up to
+        about 2&nbsp;MB). As &sect;2 explains, this log records game text
+        shown to you and the commands you typed into games, so it can
+        contain personal information you happened to type into a game.
+        The report screen previews this log; when the log is large enough
+        that only its most recent portion is shown in the preview, the
+        screen says so and reports the full size of the log that will be
+        attached.</li>
+    </ul>
+    <p>
+      Reports are posted to a channel in the IFMachine closed-testing
+      Discord server, using Discord's webhook service over HTTPS.
+      <strong>That channel is visible to the development team and to the
+      other participants in the closed test</strong>, so anything in your
+      report &mdash; including the attached log, which may contain text
+      you typed into a game &mdash; can be seen by other testers, not
+      only by us. The report screen tells you this before you send, and
+      the "View your report" link shown after sending opens the post in
+      Discord. Discord, Inc. processes the message under its own privacy
+      policy (<a href="https://discord.com/privacy">discord.com/privacy</a>).
+      Reports remain in the channel until we delete them and are used
+      only to diagnose and fix problems.
+    </p>
+    <p>
+      The report screen also offers a "Share" option that hands the same
+      report to the Android share sheet instead; as with the Debug-tab
+      export in &sect;2, the content then goes to whatever destination you
+      pick.
+    </p>
+
+    <h2>7. Permissions</h2>
 
     <p>IFMachine requests two Android permissions:</p>
     <dl class="permissions">
       <dt><code>INTERNET</code></dt>
       <dd>Cloud sync to your Google Drive (if enabled), IFDB requests
-        (when you initiate them), and Sentry crash reporting (always-on
-        in the closed-testing build).</dd>
+        (when you initiate them), Sentry crash reporting (always-on
+        in the closed-testing build), and problem reports you choose to
+        send (&sect;6).</dd>
       <dt><code>ACCESS_NETWORK_STATE</code></dt>
       <dd>Detect whether you are on Wi-Fi vs. cellular, so cloud sync
         can respect a Wi-Fi-only preference.</dd>
@@ -325,14 +375,14 @@
       calendar, or sensor permissions.
     </p>
 
-    <h2>7. Children's privacy</h2>
+    <h2>8. Children's privacy</h2>
 
     <p>
       The current closed-testing build of IFMachine is distributed by
       invitation only and is not directed at or appropriate for
       children. The app does not show advertising and does not knowingly
       collect or transmit personal data from children. The one piece of
-      age data it asks for &mdash; the year of birth entered at the IFDB
+      age data it asks for &mdash; the date of birth entered at the IFDB
       age screen &mdash; stays on your device only, is never transmitted,
       and exists solely to keep under-18 users out of the catalogue (see
       the next paragraph). Any crash data collected via Sentry (described
@@ -344,18 +394,20 @@
       Some interactive-fiction games available through IFDB are written
       for adult audiences. Because that catalogue is open and unmoderated,
       the in-app IFDB browser is kept behind an <strong>age screen</strong>:
-      the first time you open it, IFMachine asks for your year of birth
+      the first time you open it, IFMachine asks for your date of birth
       and an acknowledgement before the catalogue is shown, and keeps it
-      hidden from anyone under&nbsp;18. <strong>The year of birth you
-      enter is stored on your device only and is never transmitted to us
-      or anyone else</strong> &mdash; it exists solely so the app
-      remembers you have passed the age screen. You can clear it by
-      uninstalling the app or clearing its data in Android Settings.
+      hidden from anyone under&nbsp;18. <strong>The date of birth is
+      stored on your device only and is never transmitted to us or anyone
+      else</strong> &mdash; it lets the app remember you have passed the
+      age screen and, if you were under&nbsp;18 when you entered it,
+      unlock the catalogue automatically once you turn&nbsp;18. You can
+      clear it by uninstalling the app or clearing its data in Android
+      Settings.
       Parents and guardians should still supervise downloads of
       third-party game files as they would any other internet content.
     </p>
 
-    <h2>8. Data sharing</h2>
+    <h2>9. Data sharing</h2>
 
     <p>
       We do not sell, rent, trade, or transfer your data for
@@ -384,22 +436,33 @@
         the crash reports it collects in order to diagnose and fix
         bugs. The data Sentry receives is listed in &sect;5. We do not
         combine crash data with any other information about you.</li>
+      <li><strong>Discord</strong> (<a href="https://discord.com">discord.com</a>),
+        only when you explicitly send a problem report (&sect;6). Discord
+        acts as a data processor delivering the report to a channel in
+        our closed-testing server that is visible to the team and to
+        other testers; the report's contents are listed in &sect;6 and
+        shown to you before sending.</li>
     </ul>
 
-    <h2>9. Your choices</h2>
+    <h2>10. Your choices</h2>
 
     <ul>
       <li><strong>Crash reporting</strong>: there is no in-app toggle in
         the current closed-testing build (see &sect;5). To stop sending
         crash data to Sentry, uninstall the app or leave the
         closed-testing program.</li>
+      <li><strong>Problem reports</strong>: entirely optional. Nothing is
+        sent unless you press Send (or pick a share destination), and the
+        report's full contents are shown on screen first (&sect;6). To
+        request deletion of a report you already sent, contact us
+        (&sect;12).</li>
       <li><strong>Stop using cloud sync</strong>: turn it off in Settings.
         Files already uploaded (saves, transcripts, maps, sidecars)
         remain in your Drive until you delete them.</li>
       <li><strong>Delete your data</strong>: uninstalling IFMachine
         removes all locally stored data (game files, saves and
         autosaves, transcripts, maps, game-managed sidecars, library
-        metadata, cover art, debug log, settings, and the age-screen year
+        metadata, cover art, debug log, settings, and the age-screen date
         of birth). To delete
         cloud-synced content, delete the synced folder in your Google
         Drive. Crash data already sent to Sentry cannot be individually
@@ -410,7 +473,7 @@
         in to Google.</li>
     </ul>
 
-    <h2>10. Changes to this policy</h2>
+    <h2>11. Changes to this policy</h2>
 
     <p>
       If we change this policy, we'll update the "Last updated" date at
@@ -423,7 +486,7 @@
       Safety disclosure for the app will be updated to match.
     </p>
 
-    <h2>11. Contact</h2>
+    <h2>12. Contact</h2>
 
     <p>Questions about this policy can be sent to:</p>
     <p>
