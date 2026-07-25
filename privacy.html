@@ -16,7 +16,7 @@
 
     <p class="meta">
       <strong>Effective date:</strong> 2026-05-23<br>
-      <strong>Last updated:</strong> 2026-07-20
+      <strong>Last updated:</strong> 2026-07-24
     </p>
 
     <p>IFMachine is an Android app for playing interactive-fiction games (Z-machine and Glulx story files) published by Guppy Interactive LLC ("we", "us"). This policy explains, in plain language, what data the app touches and what it does with it.</p>
@@ -129,7 +129,7 @@
       <li>The recent tail of the debug log described in §2 (up to about 2 MB). As §2 explains, this log records game text shown to you and the commands you typed into games, so it can contain personal information you happened to type into a game. The report screen previews this log; when the log is large enough that only its most recent portion is shown in the preview, the screen says so and reports the full size of the log that will be attached.</li>
     </ul>
 
-    <p>Reports are posted to a channel in the IFMachine closed-testing Discord server, using Discord's webhook service over HTTPS. <strong>That channel is visible to the development team and to the other participants in the closed test</strong>, so anything in your report — including the attached log, which may contain text you typed into a game — can be seen by other testers, not only by us. The report screen tells you this before you send, and the "View your report" link shown after sending opens the post in Discord. Discord, Inc. processes the message under its own privacy policy (<a href="https://discord.com/privacy">discord.com/privacy</a>). Reports remain in the channel until we delete them and are used only to diagnose and fix problems.</p>
+    <p>Reports are posted to a channel in the IFMachine community Discord server, using Discord's webhook service over HTTPS. <strong>That channel is visible to the development team and to other members of that server</strong>, so anything in your report — including the attached log, which may contain text you typed into a game — can be seen by other members, not only by us. The report screen tells you this before you send, and the "View your report" link shown after sending opens the post in Discord. Discord, Inc. processes the message under its own privacy policy (<a href="https://discord.com/privacy">discord.com/privacy</a>). Reports remain in the channel until we delete them and are used only to diagnose and fix problems.</p>
 
     <p>The report screen also offers a "Share" option that hands the same report to the Android share sheet instead; as with the Debug-tab export in §2, the content then goes to whatever destination you pick.</p>
 
@@ -151,7 +151,7 @@
 
     <h2>8. Children's privacy</h2>
 
-    <p>The current closed-testing build of IFMachine is distributed by invitation only and is not directed at or appropriate for children. The app does not show advertising and does not knowingly collect or transmit personal data from children. The one piece of age data it asks for — the date of birth entered at the IFDB age screen — stays on your device only, is never transmitted, and exists solely to keep under-18 users out of the catalogue (see the next paragraph). Any crash data collected via Sentry (described in §5) is limited to the listed diagnostic and device data and is used only for debugging; we do not attempt to identify individual users.</p>
+    <p>IFMachine is not directed at or appropriate for children. The app does not show advertising and does not knowingly collect or transmit personal data from children. The one piece of age data it asks for — the date of birth entered at the IFDB age screen — stays on your device only, is never transmitted, and exists solely to keep under-18 users out of the catalogue (see the next paragraph). Any crash data collected via Sentry (described in §5) is limited to the listed diagnostic and device data and is used only for debugging; we do not attempt to identify individual users.</p>
 
     <p>Some interactive-fiction games available through IFDB are written for adult audiences. Because that catalogue is open and unmoderated, the in-app IFDB browser is kept behind an <strong>age screen</strong>: the first time you open it, IFMachine asks for your date of birth and an acknowledgement before the catalogue is shown, and keeps it hidden from anyone under 18. <strong>The date of birth is stored on your device only and is never transmitted to us or anyone else</strong> — it lets the app remember you have passed the age screen and, if you were under 18 when you entered it, unlock the catalogue automatically once you turn 18. You can clear it by uninstalling the app or clearing its data in Android Settings. Parents and guardians should still supervise downloads of third-party game files as they would any other internet content.</p>
 
@@ -165,7 +165,7 @@
       <li><strong>Google</strong>, when you enable Drive sync (the per-story content listed in §3 — saves, transcripts, maps, and game-managed sidecar files — uploaded to your own Drive) or when you sign in to a Google account through the system account picker. The synced files live in your own Google Drive, under your control; we do not see them. Drive sync is off by default and requires you to enable it.</li>
       <li><strong>IFDB / IFArchive</strong>, when you explicitly search for a game, view cover art, or download a story file (request contents listed in §4). These are read-only requests; we do not see them.</li>
       <li><strong>Sentry</strong> (<a href="https://sentry.io">sentry.io</a>, US region), when the app crashes or hits an unhandled error. Sentry acts as a data processor on our behalf: we read the crash reports it collects in order to diagnose and fix bugs. The data Sentry receives is listed in §5. We do not combine crash data with any other information about you.</li>
-      <li><strong>Discord</strong> (<a href="https://discord.com">discord.com</a>), only when you explicitly send a problem report (§6). Discord acts as a data processor delivering the report to a channel in our closed-testing server that is visible to the team and to other testers; the report's contents are listed in §6 and shown to you before sending.</li>
+      <li><strong>Discord</strong> (<a href="https://discord.com">discord.com</a>), only when you explicitly send a problem report (§6). The report is posted to a channel in our community Discord server that is visible to the team and to other members of that server, so the report is shared with those members, not only with us. Discord, Inc. transmits and stores the message under its own privacy policy. The report's contents are listed in §6 and shown to you before sending.</li>
     </ul>
 
     <h2>10. Your choices</h2>
