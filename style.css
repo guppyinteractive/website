@@ -56,14 +56,36 @@ main {
 .tagline {
   font-size: 1.25rem;
   color: var(--muted);
-  margin: 0 0 2.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.store-link {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.store-link:hover {
+  text-decoration: none;
+  background: var(--border);
 }
 
 .screenshots {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin: 2rem 0 3rem;
+}
+
+.screenshots.phones {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.screenshots.tablets {
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 3rem;
 }
 
 .screenshots img {
@@ -95,6 +117,11 @@ a:hover {
   text-decoration: underline;
 }
 
+.whatsnew h2 {
+  font-size: 1.3rem;
+  margin: 2.5rem 0 0.75rem;
+}
+
 footer {
   margin-top: 4rem;
   padding-top: 2rem;
@@ -103,13 +130,19 @@ footer {
   font-size: 0.95rem;
 }
 
+footer .fine-print {
+  max-width: 65ch;
+  margin-top: 0;
+}
+
 footer nav a {
   margin-right: 1.5rem;
 }
 
 @media (max-width: 720px) {
   main { padding: 2rem 1.25rem 3rem; }
-  .screenshots { grid-template-columns: repeat(2, 1fr); }
+  .screenshots.phones { grid-template-columns: repeat(2, 1fr); }
+  .screenshots.tablets { grid-template-columns: 1fr; }
   .hero h1 { font-size: 2rem; }
   .tagline { font-size: 1.1rem; }
 }
