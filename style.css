@@ -94,6 +94,7 @@ main {
   border-radius: 12px;
   border: 1px solid var(--border);
   display: block;
+  cursor: zoom-in;
 }
 
 .prose p {
@@ -141,11 +142,97 @@ footer nav a {
 
 @media (max-width: 720px) {
   main { padding: 2rem 1.25rem 3rem; }
-  .screenshots.phones { grid-template-columns: repeat(2, 1fr); }
-  .screenshots.tablets { grid-template-columns: 1fr; }
   .hero h1 { font-size: 2rem; }
   .tagline { font-size: 1.1rem; }
+
+  /* swipeable strips with a peek of the next image */
+  .screenshots.phones,
+  .screenshots.tablets {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    padding: 0 1.25rem;
+    scroll-padding: 0 1.25rem;
+  }
+
+  .screenshots.phones::-webkit-scrollbar,
+  .screenshots.tablets::-webkit-scrollbar {
+    display: none;
+  }
+
+  .screenshots.phones img,
+  .screenshots.tablets img {
+    flex: none;
+    scroll-snap-align: center;
+  }
+
+  .screenshots.phones img { width: 78vw; }
+  .screenshots.tablets img { width: 88vw; }
 }
+
+/* lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox[hidden] { display: none; }
+
+.lightbox img {
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vh - 2rem);
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+}
+
+.lightbox button {
+  position: fixed;
+  border: 0;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font: inherit;
+  font-size: 2.25rem;
+  line-height: 1;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 0.2rem;
+}
+
+.lightbox button:hover { background: rgba(255, 255, 255, 0.2); }
+
+.lb-prev { left: 0.75rem; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 0.75rem; top: 50%; transform: translateY(-50%); }
+.lb-close { top: 0.75rem; right: 0.75rem; }
+
+.lb-count {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 0.15rem 0.7rem;
+  border-radius: 999px;
+}
+
+body.lb-open { overflow: hidden; }
 
 /* privacy / policy specific */
 .policy h1 {

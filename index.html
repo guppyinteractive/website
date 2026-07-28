@@ -11,6 +11,7 @@
   <meta property="og:url" content="https://www.guppyinteractive.com/">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="style.css">
+  <script src="site.js" defer></script>
 </head>
 <body>
   <main>
@@ -21,11 +22,11 @@
     </header>
 
     <section class="screenshots phones">
-      <img src="screenshots/crt_phone.png" alt="IFMachine in retro terminal mode, green text on a black background.">
-      <img src="screenshots/messages_phone.png" alt="IFMachine in messages mode, with player commands and story responses styled like a chat app.">
-      <img src="screenshots/nav_map.png" alt="The automatic map, showing rooms you have visited connected subway-style, with a command grid below.">
-      <img src="screenshots/nav_route.png" alt="The automatic map plotting a walking route to a previously visited room.">
-      <img src="screenshots/nav_customize.png" alt="The customize screen for tap controls, where you edit and reorder one-tap commands.">
+      <img src="screenshots/crt_phone.png" width="1080" height="2160" alt="IFMachine in retro terminal mode, green text on a black background.">
+      <img src="screenshots/messages_phone.png" width="1080" height="2160" loading="lazy" alt="IFMachine in messages mode, with player commands and story responses styled like a chat app.">
+      <img src="screenshots/nav_map.png" width="1080" height="2160" loading="lazy" alt="The automatic map, showing rooms you have visited connected subway-style, with a command grid below.">
+      <img src="screenshots/nav_route.png" width="1080" height="2160" loading="lazy" alt="The automatic map plotting a walking route to a previously visited room.">
+      <img src="screenshots/nav_customize.png" width="1080" height="2160" loading="lazy" alt="The customize screen for tap controls, where you edit and reorder one-tap commands.">
     </section>
 
     <section class="prose">
@@ -57,8 +58,8 @@
     </section>
 
     <section class="screenshots tablets">
-      <img src="screenshots/ironwood-amber-tablet.png" alt="IFMachine on a tablet in the amber retro theme, with the story and map side by side.">
-      <img src="screenshots/ironwood-dark-tablet.png" alt="IFMachine on a tablet in the dark reading theme, with the story and map side by side.">
+      <img src="screenshots/ironwood-amber-tablet.png" width="2560" height="1600" loading="lazy" alt="IFMachine on a tablet in the amber retro theme, with the story and map side by side.">
+      <img src="screenshots/ironwood-dark-tablet.png" width="2560" height="1600" loading="lazy" alt="IFMachine on a tablet in the dark reading theme, with the story and map side by side.">
     </section>
 
     <section class="prose whatsnew">
@@ -84,5 +85,13 @@
       </nav>
     </footer>
   </main>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer" hidden>
+    <img alt="">
+    <button type="button" class="lb-prev" aria-label="Previous screenshot">&#8249;</button>
+    <button type="button" class="lb-next" aria-label="Next screenshot">&#8250;</button>
+    <button type="button" class="lb-close" aria-label="Close">&#215;</button>
+    <span class="lb-count" aria-hidden="true"></span>
+  </div>
 </body>
 </html>
