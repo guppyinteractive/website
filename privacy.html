@@ -16,12 +16,12 @@
 
     <p class="meta">
       <strong>Effective date:</strong> 2026-05-23<br>
-      <strong>Last updated:</strong> 2026-07-24
+      <strong>Last updated:</strong> 2026-08-02
     </p>
 
     <p>IFMachine is an Android app for playing interactive-fiction games (Z-machine and Glulx story files) published by Guppy Interactive LLC ("we", "us"). This policy explains, in plain language, what data the app touches and what it does with it.</p>
 
-    <p>The short version: <strong>IFMachine contains no advertising, marketing, or behavioural-analytics SDKs.</strong> The app uses Sentry for crash and error reporting, always-on, so we can diagnose issues you encounter; what Sentry receives is described in §5. Otherwise, the app stores your game progress and settings on your device, optionally syncs your per-story content (saves, transcripts, maps, and game-managed sidecar files) to your own Google Drive if you turn that on, and contacts the Interactive Fiction Database (IFDB) only when you explicitly search for a game, view cover art, or download a story file.</p>
+    <p>The short version: <strong>IFMachine contains no advertising, marketing, or behavioural-analytics SDKs.</strong> The app uses Sentry for crash and error reporting, always-on, so we can diagnose issues you encounter; what Sentry receives is described in §5. Otherwise, the app stores your game progress and settings on your device, optionally syncs your per-story content (saves, transcripts, maps, and game-managed sidecar files) to your own Google Drive if you turn that on, and contacts the Interactive Fiction Database (IFDB) only when you explicitly search for a game, view cover art, or download a story file. Reading aloud uses on-device voices unless you accept the separate disclosure for online voices described in §7.</p>
 
     <p>If you want the long version, read on.</p>
 
@@ -41,7 +41,7 @@
 
     <p>Note that Android itself also collects basic crash and ANR (application-not-responding) telemetry for apps installed via Google Play; that data goes to Google as part of the Play platform under Google's own privacy terms, not under this policy.</p>
 
-    <p>The situations in which information <em>does</em> leave your device are described in §3 (optional Google Drive sync of your per-story content), §4 (optional IFDB lookups), §5 (Sentry crash reporting, always-on), and §6 (problem reports you choose to send). §3 and §4 are off by default and require an explicit action by you; §6 happens only when you press Send on a report whose full contents are shown to you first. Section 2 lists what the app stores <strong>locally on your device</strong> — including the Google account name once you connect Drive sync, which is kept on-device so the Settings screen can show you which account is linked.</p>
+    <p>The situations in which information <em>does</em> leave your device are described in §3 (optional Google Drive sync of your per-story content), §4 (optional IFDB lookups), §5 (Sentry crash reporting, always-on), §6 (problem reports you choose to send), and §7 (optional online voices for reading aloud). §3, §4, and §7 are off by default and require an explicit action by you; §6 happens only when you press Send on a report whose full contents are shown to you first. Section 2 lists what the app stores <strong>locally on your device</strong> — including the Google account name once you connect Drive sync, which is kept on-device so the Settings screen can show you which account is linked.</p>
 
     <h2>2. What is stored on your device</h2>
 
@@ -56,7 +56,7 @@
       <li><strong>A debug log</strong> (<code>ifminput.log</code>) — diagnostic markers and unimplemented opcode traces used for development. The log records game text shown to you and the commands you type into games. Because game commands are free-form text, the log can contain any personal information you happen to type into a game (for example a name, an email address, or a password-like string). The log stays in the app's private storage and never leaves your device unless you explicitly export it via the Debug tab or include it in a problem report you choose to send (§6). Exporting uses the Android share sheet, which lets you pick the destination (email, file save, messaging app, etc.); the log content goes wherever you send it. To remove the log, uninstall the app or clear app data in Android Settings.</li>
       <li><strong>An install identifier (UUID)</strong> — a random identifier generated once when you first install the app. It is used inside save files to distinguish your devices when resolving cloud sync conflicts. It is not tied to your name, account, or any external identity.</li>
       <li><strong>Connected Google account name</strong> — <em>only if you enable Drive sync in Settings</em> — the Google account name (usually an email address) of the account you signed in with. It is stored locally so the Settings screen can display which account is currently connected. It is never sent to any server we operate; see §3 for how it is used by Google's own Drive authentication flow.</li>
-      <li><strong>Age-screen date of birth</strong> — <em>only if you open the IFDB browser</em> — the date of birth you enter at the age screen, plus a flag recording that you passed it. Stored locally and never transmitted; kept so you are not re-prompted and so the catalogue unlocks on its own once you turn 18. Used only to keep under-18 users out of the IFDB catalogue (see §8).</li>
+      <li><strong>Age-screen date of birth</strong> — <em>only if you open the IFDB browser</em> — the date of birth you enter at the age screen, plus a flag recording that you passed it. Stored locally and never transmitted; kept so you are not re-prompted and so the catalogue unlocks on its own once you turn 18. Used only to keep under-18 users out of the IFDB catalogue (see §9).</li>
     </ul>
 
     <p>This data lives in the app's private storage and is removed when you uninstall the app.</p>
@@ -133,7 +133,24 @@
 
     <p>The report screen also offers a "Share" option that hands the same report to the Android share sheet instead; as with the Debug-tab export in §2, the content then goes to whatever destination you pick.</p>
 
-    <h2>7. Permissions</h2>
+    <h2>7. Reading aloud (optional online voices)</h2>
+
+    <p>IFMachine's read-aloud feature speaks game text using the text-to-speech engine built into Android — the same one your device uses for TalkBack and other apps, which you choose and configure in Android's own settings. <strong>By default IFMachine uses only on-device voices, and the text being read never leaves your device.</strong></p>
+
+    <p>Some text-to-speech engines also offer <em>online</em> (network) voices, which sound better because the speech is generated on the engine provider's servers rather than on your phone. Using one means the text being read has to be sent to that provider. <strong>IFMachine will not use an online voice until you have been shown a disclosure and accepted it.</strong> That consent is the switch that matters: until you accept, read-aloud stays entirely on-device, and if no on-device voice is available for your language the app declines to speak rather than quietly going online.</p>
+
+    <p>Once you have accepted, and while your device is online, the text sent to the engine is the game text being narrated. That is the story's prose, and also the commands you typed, because games echo your commands back into the text they display. <strong>So the text sent can include anything you typed into a game.</strong> We do not send your name, account, device identifiers, or any other information about you along with it.</p>
+
+    <p>The engine is a separate app that you selected in Android's settings, not a service we operate or contract with. We hand it text through Android's standard text-to-speech interface; we never see its network requests and we never receive the text back. The privacy policy of whichever engine you have selected — Google Speech Services, or another you installed — governs what that provider does with it.</p>
+
+    <p>Two details worth knowing, because they are easy to assume otherwise:</p>
+
+    <ul>
+      <li>The <strong>"prefer online voices" setting is not the thing that turns this on.</strong> That setting only decides whether to use an online voice when an on-device version of the <em>same</em> voice already exists. Even with it switched off, an accepted consent means an online voice is used when the voice you picked has no on-device version, or when your language has no on-device voice installed at all.</li>
+      <li>Declining the disclosure, or revoking it later in Settings, returns read-aloud to on-device voices only.</li>
+    </ul>
+
+    <h2>8. Permissions</h2>
 
     <p>IFMachine requests two Android permissions:</p>
 
@@ -142,20 +159,20 @@
         <tr><th>Permission</th><th>Purpose</th></tr>
       </thead>
       <tbody>
-        <tr><td><code>INTERNET</code></td><td>Cloud sync to your Google Drive (if enabled), IFDB requests (when you initiate them), Sentry crash reporting (always-on), and problem reports you choose to send (§6).</td></tr>
+        <tr><td><code>INTERNET</code></td><td>Cloud sync to your Google Drive (if enabled), IFDB requests (when you initiate them), Sentry crash reporting (always-on), problem reports you choose to send (§6), and online read-aloud voices (if you accepted the disclosure in §7).</td></tr>
         <tr><td><code>ACCESS_NETWORK_STATE</code></td><td>Detect whether you are on Wi-Fi vs. cellular, so cloud sync can respect a Wi-Fi-only preference.</td></tr>
       </tbody>
     </table>
 
     <p>We do not request location, camera, microphone, contacts, phone, calendar, or sensor permissions.</p>
 
-    <h2>8. Children's privacy</h2>
+    <h2>9. Children's privacy</h2>
 
     <p>IFMachine is not directed at or appropriate for children. The app does not show advertising and does not knowingly collect or transmit personal data from children. The one piece of age data it asks for — the date of birth entered at the IFDB age screen — stays on your device only, is never transmitted, and exists solely to keep under-18 users out of the catalogue (see the next paragraph). Any crash data collected via Sentry (described in §5) is limited to the listed diagnostic and device data and is used only for debugging; we do not attempt to identify individual users.</p>
 
     <p>Some interactive-fiction games available through IFDB are written for adult audiences. Because that catalogue is open and unmoderated, the in-app IFDB browser is kept behind an <strong>age screen</strong>: the first time you open it, IFMachine asks for your date of birth and an acknowledgement before the catalogue is shown, and keeps it hidden from anyone under 18. <strong>The date of birth is stored on your device only and is never transmitted to us or anyone else</strong> — it lets the app remember you have passed the age screen and, if you were under 18 when you entered it, unlock the catalogue automatically once you turn 18. You can clear it by uninstalling the app or clearing its data in Android Settings. Parents and guardians should still supervise downloads of third-party game files as they would any other internet content.</p>
 
-    <h2>9. Data sharing</h2>
+    <h2>10. Data sharing</h2>
 
     <p>We do not sell, rent, trade, or transfer your data for advertising, marketing, profiling, or behavioural analytics. We do not run any servers that receive data from IFMachine.</p>
 
@@ -166,23 +183,25 @@
       <li><strong>IFDB / IFArchive</strong>, when you explicitly search for a game, view cover art, or download a story file (request contents listed in §4). These are read-only requests; we do not see them.</li>
       <li><strong>Sentry</strong> (<a href="https://sentry.io">sentry.io</a>, US region), when the app crashes or hits an unhandled error. Sentry acts as a data processor on our behalf: we read the crash reports it collects in order to diagnose and fix bugs. The data Sentry receives is listed in §5. We do not combine crash data with any other information about you.</li>
       <li><strong>Discord</strong> (<a href="https://discord.com">discord.com</a>), only when you explicitly send a problem report (§6). The report is posted to a channel in our community Discord server that is visible to the team and to other members of that server, so the report is shared with those members, not only with us. Discord, Inc. transmits and stores the message under its own privacy policy. The report's contents are listed in §6 and shown to you before sending.</li>
+      <li><strong>The text-to-speech engine you selected in Android's settings</strong> (commonly Google Speech Services), and only if you accepted the online-voice disclosure described in §7. It then receives the game text being read aloud, which can include commands you typed, because games echo them back into their output. That engine is an app you chose and configured, not a service we operate or contract with; we never see its requests. Its provider's own privacy policy applies. Online voices are off until you accept the disclosure.</li>
     </ul>
 
-    <h2>10. Your choices</h2>
+    <h2>11. Your choices</h2>
 
     <ul>
       <li><strong>Crash reporting</strong>: always-on, with no in-app toggle (see §5). To stop sending crash data to Sentry, uninstall the app.</li>
-      <li><strong>Problem reports</strong>: entirely optional. Nothing is sent unless you press Send (or pick a share destination), and the report's full contents are shown on screen first (§6). To request deletion of a report you already sent, contact us (§12).</li>
+      <li><strong>Problem reports</strong>: entirely optional. Nothing is sent unless you press Send (or pick a share destination), and the report's full contents are shown on screen first (§6). To request deletion of a report you already sent, contact us (§13).</li>
       <li><strong>Stop using cloud sync</strong>: turn it off in Settings. Files already uploaded (saves, transcripts, maps, sidecars) remain in your Drive until you delete them.</li>
       <li><strong>Delete your data</strong>: uninstalling IFMachine removes all locally stored data (game files, saves and autosaves, transcripts, maps, game-managed sidecars, library metadata, cover art, debug log, settings, and the age-screen date of birth). To delete cloud-synced content, delete the synced folder in your Google Drive. Crash data already sent to Sentry cannot be individually deleted on request in the current build (see §5); it auto-expires after 90 days.</li>
+      <li><strong>Online read-aloud voices</strong>: off until you accept the disclosure described in §7. Revoke it in Settings and read-aloud goes back to on-device voices only, so the text being read stops leaving your device.</li>
       <li><strong>Use the app without an account</strong>: cloud sync is opt-in. You can use every feature of IFMachine without signing in to Google.</li>
     </ul>
 
-    <h2>11. Changes to this policy</h2>
+    <h2>12. Changes to this policy</h2>
 
     <p>If we change this policy, we'll update the "Last updated" date at the top and publish the new version at this URL. Material changes — for example, adding usage analytics, changing how crash reporting works (e.g. adding an in-app toggle or attaching save files to reports), or any other change to what data leaves the device — will be called out in the app's release notes. Where any such change adds a data type, the Google Play Data Safety disclosure for the app will be updated to match.</p>
 
-    <h2>12. Contact</h2>
+    <h2>13. Contact</h2>
 
     <p>Questions about this policy can be sent to:</p>
 
