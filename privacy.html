@@ -16,7 +16,7 @@
 
     <p class="meta">
       <strong>Effective date:</strong> 2026-05-23<br>
-      <strong>Last updated:</strong> 2026-08-28
+      <strong>Last updated:</strong> 2026-09-30
     </p>
 
     <p>IFMachine is an Android app for playing interactive-fiction games (Z-machine and Glulx story files) published by Guppy Interactive LLC ("we", "us"). This policy explains, in plain language, what data the app touches and what it does with it.</p>
@@ -33,7 +33,7 @@
       <li>Your name, contact details, phone number, or physical address</li>
       <li>Your physical or device location (the app requests no location permissions)</li>
       <li>Your device's advertising ID, IMEI, MAC address, or other hardware identifiers</li>
-      <li>Continuous background analytics, usage telemetry, session data, screen-view tracking, or button-tap tracking sent in real time while the app is running. Two narrower things are sent to Sentry and are described in §5, so that this bullet is not read as covering them: the short breadcrumb trail, which is captured locally and sent <strong>only when the app crashes</strong>, and the gameplay-diagnostic map-learning report, which is sent while the app is running normally, only for a game you agreed to when asked, and carries no breadcrumbs</li>
+      <li>Continuous background analytics, usage telemetry, session data, screen-view tracking, or button-tap tracking sent in real time while the app is running. Two narrower things are sent to Sentry and are described in §5, so that this bullet is not read as covering them: the short breadcrumb trail, which is captured locally and sent <strong>only when the app crashes or stops responding</strong>, and the gameplay-diagnostic map-learning report, which is sent while the app is running normally, only for a game you agreed to when asked, and carries no breadcrumbs</li>
       <li>Any data for marketing, profiling, or behavioural advertising</li>
     </ul>
 
@@ -53,7 +53,7 @@
       <li><strong>Library metadata</strong> — title, author, IFID identifier, import date, and the path to any cover art you selected</li>
       <li><strong>Cover art images</strong> you select (either from Blorb resources embedded in the game file, or from IFDB via the cover-art picker)</li>
       <li><strong>App settings</strong> — theme, font, map style, navigation panel position, etc.</li>
-      <li><strong>A debug log</strong> (<code>ifminput.log</code>) — diagnostic markers and unimplemented opcode traces used for development. The log records game text shown to you and the commands you type into games. Because game commands are free-form text, the log can contain any personal information you happen to type into a game (for example a name, an email address, or a password-like string). The log stays in the app's private storage and never leaves your device unless you explicitly export it via the Debug tab or include it in a problem report you choose to send (§6). Exporting uses the Android share sheet, which lets you pick the destination (email, file save, messaging app, etc.); the log content goes wherever you send it. To remove the log, uninstall the app or clear app data in Android Settings.</li>
+      <li><strong>A debug log</strong> (<code>ifminput.log</code>) — diagnostic markers and unimplemented opcode traces used for development. The log records game text shown to you and the commands you type into games. Because game commands are free-form text, the log can contain any personal information you happen to type into a game (for example a name, an email address, or a password-like string). The log stays in the app's private storage and never leaves your device unless you include it in a problem report you choose to send or share (§6). To remove the log, uninstall the app or clear app data in Android Settings.</li>
       <li><strong>An install identifier (UUID)</strong> — a random identifier generated once when you first install the app. It is used inside save files to distinguish your devices when resolving cloud sync conflicts. It is not tied to your name, account, or any external identity.</li>
       <li><strong>Connected Google account name</strong> — <em>only if you enable Drive sync in Settings</em> — the Google account name (usually an email address) of the account you signed in with. It is stored locally so the Settings screen can display which account is currently connected. It is never sent to any server we operate; see §3 for how it is used by Google's own Drive authentication flow.</li>
       <li><strong>Age-screen date of birth</strong> — <em>only if you open the IFDB browser</em> — the date of birth you enter at the age screen, plus a flag recording that you passed it. Stored locally and never transmitted; kept so you are not re-prompted and so the catalogue unlocks on its own once you turn 18. Used only to keep under-18 users out of the IFDB catalogue (see §9).</li>
@@ -97,16 +97,20 @@
 
     <h2>5. Crash reporting and map-learning diagnostics (Sentry)</h2>
 
-    <p>IFMachine ships with the <strong>Sentry</strong> error-tracking SDK (<a href="https://sentry.io">sentry.io</a>, US region, operated by Functional Software, Inc.) enabled at app launch. Sentry collects crash and error data and forwards it to us so we can diagnose and fix problems. It also carries one other kind of event, the <strong>gameplay-diagnostic</strong> map-learning report described further down, which is sent while the app is running normally rather than when something has gone wrong. The two differ in who decides. Crash reporting is <strong>always-on</strong>: there is <strong>no in-app toggle</strong> to disable it, and to stop sending crash data you uninstall the app. The map-learning report is sent <strong>only for games you agree to</strong>, and the app asks you before the first one goes.</p>
+    <p>IFMachine ships with the <strong>Sentry</strong> error-tracking SDK (<a href="https://sentry.io">sentry.io</a>, US region, operated by Functional Software, Inc.) enabled at app launch. Sentry collects crash and error data, including a warning when Google Drive sync stalls, and forwards it to us so we can diagnose and fix problems. It also carries one other kind of event, the <strong>gameplay-diagnostic</strong> map-learning report described further down, which is sent while the app is running normally rather than when something has gone wrong. The two differ in who decides. Crash reporting is <strong>always-on</strong>: there is <strong>no in-app toggle</strong> to disable it, and to stop sending crash data you uninstall the app. The map-learning report is sent <strong>only for games you agree to</strong>, and the app asks you before the first one goes.</p>
 
-    <p><strong>Crash and error reports.</strong> When the app crashes or hits an unhandled error, Sentry receives:</p>
+    <p><strong>Crash and error reports.</strong> When the app crashes or hits an unhandled error, including an error inside the game engine that stops the game you are playing, Sentry receives:</p>
 
     <ul>
-      <li>The stack trace and exception type</li>
+      <li>The stack trace, the exception type, and the error message that came with it</li>
       <li>The IFMachine app version, build number, and release identifier</li>
+      <li>Which game you were running, if one was open, identified from the story file in the same terms as the map-learning report described below, together with the game's IFID, the public identifier the Interactive Fiction Database lists games under, when the app can read or work one out from the story file</li>
+      <li>Whether that game is one of the games that come with the app, whether it was shown in Retro Desktop mode, and, for a game you downloaded through the in-app IFDB browser, that game's IFDB identifier</li>
       <li>Device model (e.g. "Pixel 7"), manufacturer, CPU architecture, Android version, screen resolution, available memory and storage, locale, and timezone</li>
-      <li>A short trail of recent in-app events ("breadcrumbs") — the most recent navigation, lifecycle, and log events before the crash, used to help reproduce the issue. The breadcrumb trail does not include game text or your typed commands.</li>
+      <li>When the app itself crashes or stops responding, a short trail of recent in-app events ("breadcrumbs") — the most recent navigation, lifecycle, and log events before the crash, used to help reproduce the issue. The breadcrumb trail does not include game text or your typed commands.</li>
     </ul>
+
+    <p><strong>Drive sync warnings.</strong> These are part of crash and error reporting. If you use Google Drive sync and a request to Google Drive or Google Play services stops responding, Sentry receives a warning naming the part of sync that stalled and how long the app waited, along with the app version, build number, and release identifier and the device information listed above.</p>
 
     <p><strong>The map-learning report (gameplay-diagnostic).</strong> IFMachine draws you a map as you explore a game. To do that it has to know where inside that particular game the player's current room is recorded, and games do not agree on where that is. For a game we have not already worked out, the app watches how the game behaves as you play and tries to work it out on its own. When it reaches an answer, it sends that answer to us so we can build it into a later version of the app, which is the only way the result ever becomes a map for you or for anyone else playing that game.</p>
 
@@ -123,7 +127,7 @@
       <li>The IFMachine app version.</li>
     </ul>
 
-    <p>The report does <strong>not</strong> contain anything you typed, any game text you were shown, your transcripts, saves, or maps, the debug log described in §2, or the IFMachine install identifier. The breadcrumb trail described above is deliberately cleared from this event before it is sent, so breadcrumbs still leave your device only with a crash. The device and app information listed above, and Sentry's own installation identifier described below, do ride along with this event, because it goes through the same Sentry client.</p>
+    <p>The report does <strong>not</strong> contain anything you typed, any game text you were shown, your transcripts, saves, or maps, the debug log described in §2, or the IFMachine install identifier. The breadcrumb trail described above is deliberately cleared from this event before it is sent, so breadcrumbs still leave your device only when the app crashes or stops responding. The device and app information listed above, and Sentry's own installation identifier described below, do ride along with this event, because it goes through the same Sentry client.</p>
 
     <p>Sentry does <strong>not</strong> receive your name, contact details, the Google account you may have connected for Drive sync, an advertising ID, IMEI, MAC address, location, or the contents of the debug log described in §2, with either kind of event. The IFMachine install identifier (the UUID described in §2) is not sent with either. <strong>IP address is also stripped:</strong> IFMachine initialises the Sentry SDK with <code>sendDefaultPii = false</code>, so Sentry does not store your IP address with the crash report.</p>
 
@@ -148,7 +152,7 @@
 
     <p>Reports are posted to a channel in the IFMachine community Discord server, using Discord's webhook service over HTTPS. <strong>That channel is visible to the development team and to other members of that server</strong>, so anything in your report — including the attached log, which may contain text you typed into a game — can be seen by other members, not only by us. The report screen tells you this before you send, and the "View your report" link shown after sending opens the post in Discord. Discord, Inc. processes the message under its own privacy policy (<a href="https://discord.com/privacy">discord.com/privacy</a>). Reports remain in the channel until we delete them and are used only to diagnose and fix problems.</p>
 
-    <p>The report screen also offers a "Share" option that hands the same report to the Android share sheet instead; as with the Debug-tab export in §2, the content then goes to whatever destination you pick.</p>
+    <p>The report screen also offers a "Share" option that hands the same report to the Android share sheet instead, which lets you pick the destination (email, file save, messaging app, etc.). The report, attached log included, then goes to whatever destination you pick.</p>
 
     <h2>7. Reading aloud (optional online voices)</h2>
 
@@ -200,7 +204,7 @@
     <ul>
       <li><strong>Google</strong>, when you enable Drive sync (the per-story content listed in §3 — saves, transcripts, maps, and game-managed sidecar files — uploaded to your own Drive) or when you sign in to a Google account through the system account picker. The synced files live in your own Google Drive, under your control; we do not see them. Drive sync is off by default and requires you to enable it.</li>
       <li><strong>IFDB / IFArchive</strong>, when you explicitly search for a game, view cover art, or download a story file (request contents listed in §4). These are read-only requests; we do not see them.</li>
-      <li><strong>Sentry</strong> (<a href="https://sentry.io">sentry.io</a>, US region), on two triggers: when the app crashes or hits an unhandled error, and when the app has worked out how to map a game and sends the gameplay-diagnostic report described in §5. Sentry acts as a data processor on our behalf: we read the crash reports it collects in order to diagnose and fix bugs, and the map-learning reports in order to build maps for more games into later versions of the app. The data Sentry receives, of both kinds, is listed in §5. We do not combine either with any other information about you.</li>
+      <li><strong>Sentry</strong> (<a href="https://sentry.io">sentry.io</a>, US region), on two triggers: when the app crashes, hits an unhandled error, or finds Google Drive sync stalled, and when the app has worked out how to map a game and sends the gameplay-diagnostic report described in §5. Sentry acts as a data processor on our behalf: we read the crash reports it collects in order to diagnose and fix bugs, and the map-learning reports in order to build maps for more games into later versions of the app. The data Sentry receives, of both kinds, is listed in §5. We do not combine either with any other information about you.</li>
       <li><strong>Discord</strong> (<a href="https://discord.com">discord.com</a>), only when you explicitly send a problem report (§6). The report is posted to a channel in our community Discord server that is visible to the team and to other members of that server, so the report is shared with those members, not only with us. Discord, Inc. transmits and stores the message under its own privacy policy. The report's contents are listed in §6 and shown to you before sending.</li>
       <li><strong>The text-to-speech engine you selected in Android's settings</strong> (commonly Google Speech Services), and only if you accepted the online-voice disclosure described in §7. It then receives the game text being read aloud, which can include commands you typed, because games echo them back into their output. That engine is an app you chose and configured, not a service we operate or contract with; we never see its requests. Its provider's own privacy policy applies. Online voices are off until you accept the disclosure.</li>
     </ul>
